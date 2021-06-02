@@ -16,6 +16,28 @@ public class Song {
         this.songLength=songLength;
         this.drawable=drawable;
     }
+    public void setId(String id){
+        this.id = id;
+    }
+
+    public void setArtist(String artist) {
+        this.artist = artist;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    public void setDrawable(int drawable) {
+        this.drawable = drawable;
+    }
+
+    public void setFileLink(String fileLink) {
+        this.fileLink = fileLink;
+    }
+
+    public void setSongLength(double songLength) {
+        this.songLength = songLength;
+    }
     public String getId(){ return id;}
     public String getTitle(){return title;}
     public String getArtist(){ return artist;}

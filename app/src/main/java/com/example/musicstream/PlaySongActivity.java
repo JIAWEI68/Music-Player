@@ -71,7 +71,7 @@ public class PlaySongActivity extends AppCompatActivity {
     }
 
     public void displaySongBasedOnIndex(int selectedIndex) {
-        Song song = songCollection.getCurrentSong(currentIndex);
+        Song song = songCollection.getCurrentSong(selectedIndex);
         title = song.getTitle();
         artiste = song.getArtist();
         fileLink = song.getFileLink();

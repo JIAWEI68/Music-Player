@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import java.io.IOException;
 
-public class PlaySongActivity extends AppCompatActivity {
+public class PlayingActivity extends AppCompatActivity {
     private String title = "";
     private String artiste = "";
     private String fileLink = "";
@@ -22,12 +22,12 @@ public class PlaySongActivity extends AppCompatActivity {
 
     private MediaPlayer player = new MediaPlayer();
     private Button btnPlayPause = null;
-    private final SongCollection songCollection = new SongCollection();
+    public final SongCollection songCollection = new SongCollection();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_play_song2);
+        setContentView(R.layout.activity_playing);
         btnPlayPause = findViewById(R.id.playButton);
         Bundle songData = this.getIntent().getExtras();
         currentIndex = songData.getInt("index");

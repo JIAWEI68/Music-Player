@@ -1,9 +1,13 @@
 package com.example.musicstream;
 
+import java.util.ArrayList;
+
 public class SongCollection {
 
+
+
     private static Song getCurrentSong;
-    private Song songs[] = new Song[9];
+    private Song songs[] = new Song[12];
     private int currentIndex;
 
     public SongCollection() {
@@ -61,15 +65,36 @@ public class SongCollection {
                 "https://p.scdn.co/mp3-preview/7babdc7a71c3e758e4e8421f1212d549921ca9e6?cid=2afe87a64b0042dabf51f37318616965",
                 2.77,
                 R.drawable.better_with_you_cover);
-        songs[0] = Scargazer;
-        songs[1] = 白日;
-        songs[2] = Photograph;
-        songs[3] =FunkyGalileo;
-        songs[4] = HeartBreakAnniversary;
+        Song Wicked = new Song("S1010",
+                "Wicked",
+                "Benjamin Kheng",
+                "https://p.scdn.co/mp3-preview/ed6d34be8cf892a34c1c161b8f524adac8047ee2?cid=2afe87a64b0042dabf51f37318616965",
+                3.16,
+                R.drawable.wicked_cover);
+        Song JustForYou = new Song("S1011",
+                "Just For You",
+                "Lil Pitchy",
+                "https://p.scdn.co/mp3-preview/b945d5274d01c2177ea6012e2136d3446e5b4603?cid=2afe87a64b0042dabf51f37318616965",
+                3.19,
+                R.drawable.just_for_you_cover);
+        Song DreamyNight = new Song("S1012",
+                "dreamy night",
+                "Us The Duo",
+                "https://p.scdn.co/mp3-preview/8084a68dfddbc0fa9fac02c88c822cf9f6768500?cid=2afe87a64b0042dabf51f37318616965",
+                3.89,
+                R.drawable.dreamy_night_cover);
+        songs[0]= Scargazer;
+        songs[1]= 白日;
+        songs[2]= Photograph;
+        songs[3]=FunkyGalileo;
+        songs[4]= HeartBreakAnniversary;
         songs[5]= AtMyWorst;
         songs[6]= Smile;
         songs[7]= Gurenge;
-        songs[8] = BetterWithYou;
+        songs[8]= BetterWithYou;
+        songs[9]= Wicked;
+        songs[10]=JustForYou;
+        songs[11]=DreamyNight;
     }
 
     public Song[] getSongs(){

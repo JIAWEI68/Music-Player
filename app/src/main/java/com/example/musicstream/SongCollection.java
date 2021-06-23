@@ -1,7 +1,5 @@
 package com.example.musicstream;
 
-import java.util.ArrayList;
-
 public class SongCollection {
 
 
@@ -105,7 +103,7 @@ public class SongCollection {
         return songs[currentSongId];
     }
 
-    public int SearchSongById(String id) {
+    public int searchSongById(String id) {
         for (int index = 0; index < songs.length; index++) {
             Song tempSong = songs[index];
             if (tempSong.getId().equals(id)) {
@@ -130,6 +128,11 @@ public class SongCollection {
             return currentSongIndex - 1;
         }
 
+    }
+    public Song SearchSongById(String id){
+        byte index = 0;
+        Song tempSong = songs[index];
+        return tempSong;
     }
 }
 

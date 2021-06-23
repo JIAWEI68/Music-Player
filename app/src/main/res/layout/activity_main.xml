@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:onClick="SongList"
-    tools:context=".SongsActivity">
+    tools:context=".MainActivity">
 
     <Button
         android:id="@+id/playlist_button"
@@ -25,7 +25,7 @@
         android:layout_height="83dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="140dp"
-        android:onClick="Favourite"
+        android:onClick="FavouritePage"
         android:outlineSpotShadowColor="@color/grey"
         android:text="Favourite Songs"
         app:layout_constraintStart_toStartOf="parent"

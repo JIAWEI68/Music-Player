@@ -1,5 +1,6 @@
 package com.example.musicstream;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.collection.ArraySet;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
@@ -37,7 +39,7 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder>
    //context of main activity
    //extended context
    private Song[] songs;
-   private ArrayList<Song> FavList = new ArrayList<>();
+   public ArrayList<Song> FavList = new ArrayList<>();
    public SongsAdapter(Activity activity){
        this.activity = activity;
        SongCollection songCollection = new SongCollection();
@@ -66,31 +68,30 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder>
             intent.putExtra("index", position);
             activity.startActivity(intent);
         });
-        holder.AddButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(FavList.isEmpty()){
-                    FavList.add(song);
-                    for (Song song1 : FavList) {
-                        Log.d("temasek", "Song Name :" + song1.getTitle());
-                    }
-                }
-                Gson gson = new Gson();
-                String json = gson.toJson(FavList);
-                Log.d("gson",json);
-                SharedPreferences sharedPreferences = activity.getSharedPreferences("Favourite", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("list",json);
-                editor.apply();
+        holder.AddButton.setOnClickListener(v -> {
+            sharedPreferences = activity.getSharedPreferences("Favourite", Context.MODE_PRIVATE);
+            String album = sharedPreferences.getString("list", "");
+            if (!album.equals("")) { TypeToken<ArrayList<Song>> token = new TypeToken<ArrayList<Song>>() {
+            };Gson gson = new Gson();
+            FavList = gson.fromJson(album, token.getType()); }
+            FavList.add(song);
+            for (Song song1 : FavList) { Log.d("temasek", "Song Name :" + song1.getTitle()); }
+            Gson gson = new Gson();
+            String json = gson.toJson(FavList);
+            Log.d("gson",json);
+            SharedPreferences sharedPreferences = activity.getSharedPreferences("Favourite", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("list",json);
+            editor.apply();
 
 
 
-            }
+
+
         }
 
 
-
-            // 1) Here we have a arrayList of songs u stored in THIS PAGE.
+                // 1) Here we have a arrayList of songs u stored in THIS PAGE.
             // 2) Now convert this arrayList to JSON using GSON LIBRARY
             // 3) Use the feature shared preferences (WATCH THE VID) to transfer the JSON DATA OUT OF THIS PAGE
         );

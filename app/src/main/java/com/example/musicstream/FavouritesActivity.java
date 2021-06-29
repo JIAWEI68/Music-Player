@@ -1,6 +1,8 @@
 package com.example.musicstream;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.arch.core.internal.SafeIterableMap;
+import androidx.collection.ArraySet;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,6 +15,7 @@ import android.view.View;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.net.ResponseCache;
 import java.util.ArrayList;
 
 public class FavouritesActivity extends AppCompatActivity {
@@ -47,6 +50,7 @@ public class FavouritesActivity extends AppCompatActivity {
     ArrayList<Song> favlist = new ArrayList<Song>();
 
 
+
     public void Favourite(View view) {
         String songId = view.getContentDescription().toString();
         Song song = songCollection.SearchSongById(songId);
@@ -56,7 +60,6 @@ public class FavouritesActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("list",json);
         editor.apply();
-
 
 
 

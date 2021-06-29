@@ -1,13 +1,15 @@
 package com.example.musicstream;
 
+import java.util.ArrayList;
+
 public class FavouriteSongCollection {
 
-        Song[]favouriteSongs=new Song[12];
-        public void setFavouriteSongs(Song[]favouriteSongs){
-            this.favouriteSongs = favouriteSongs;
+        ArrayList<Song> FavouriteSongs =new ArrayList<Song>();
+        public void setFavouriteSongs(ArrayList<Song> FavouriteSongs){
+            this.FavouriteSongs = FavouriteSongs;
         }
-        public Song[] getFavouriteSongs(){
-            return this.favouriteSongs;
+        public ArrayList getFavouriteSongs(){
+            return this.FavouriteSongs;
 
         }
     }

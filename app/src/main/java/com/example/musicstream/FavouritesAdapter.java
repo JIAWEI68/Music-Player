@@ -5,11 +5,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.ViewHolder>
 
@@ -17,7 +20,7 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.Vi
     private Activity activity;
     //context of main activity
     //extended context
-    private Song[] FavouriteSongs;
+    private ArrayList<Song> FavouriteSongs;
     public FavouritesAdapter(Activity activity){
         this.activity = activity;
         FavouriteSongCollection favouriteSongCollection = new FavouriteSongCollection();
@@ -34,7 +37,7 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Song song = FavouriteSongs[position];
+        Song song = FavouriteSongs.get(position);
         if(song!=null){
             holder.titleText.setText(song.getTitle());
             holder.artisteText.setText(song.getArtist());
@@ -48,7 +51,7 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.Vi
     }
     @Override
     public int getItemCount() {
-        return FavouriteSongs.length;
+        return FavouriteSongs.size();
     }
     public class ViewHolder extends RecyclerView.ViewHolder {
         public View itemView;

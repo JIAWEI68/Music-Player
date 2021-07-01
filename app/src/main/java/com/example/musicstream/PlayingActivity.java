@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +25,8 @@ public class PlayingActivity extends AppCompatActivity {
     private MediaPlayer player = new MediaPlayer();
     private Button btnPlayPause = null;
     public final SongCollection songCollection = new SongCollection();
+    SeekBar seekBar;
+    Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +38,41 @@ public class PlayingActivity extends AppCompatActivity {
         Log.d("temasek", "Retrieved position is: " + currentIndex);
         displaySongBasedOnIndex(currentIndex);
         playSong(fileLink);
+        seekBar = findViewById(R.id.seekBar);
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                if (player != null && player.isPlaying()){
+                    player.seekTo(seekBar.getProgress());
+                }
+            }
+        });
+
     }
+    Runnable bar = new Runnable() {
+        @Override
+        public void run() {
+            if (player != null&&player.isPlaying()){
+        seekBar.setProgress(player.getCurrentPosition());
+
+        }
+            handler.postDelayed(this,1000);}
+    };
 
     public void playPrevious(View view) {
         currentIndex = songCollection.getPrevSong(currentIndex);
         Toast.makeText(this, "After clicking playPrevious,\nthe current index of this song\n" +
-                "in the SongCollection array is now:" + currentIndex, Toast.LENGTH_SHORT).show();
+                "in the SongCollection array is now : " + currentIndex, Toast.LENGTH_SHORT).show();
         Log.d("temasek","After playPrev, the index is now :" + currentIndex);
         displaySongBasedOnIndex(currentIndex);
         playSong(fileLink);
@@ -54,6 +87,9 @@ public class PlayingActivity extends AppCompatActivity {
                 btnPlayPause.setText("PLAY");
             } else {
                 player.start();
+                handler.removeCallbacks(bar);
+                handler.postDelayed(bar,1000);
+                seekBar.setMax(player.getDuration());
                 btnPlayPause.setText("PAUSE");
             }
         }
@@ -110,7 +146,8 @@ public class PlayingActivity extends AppCompatActivity {
         @Override
         public void onBackPressed(){
         super.onBackPressed();
-        player.release();
+            player.release();
+
         }
 
 }

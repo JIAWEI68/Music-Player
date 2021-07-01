@@ -1,14 +1,13 @@
 package com.example.musicstream;
 
+import java.util.Collection;
+
 public class SongCollection {
-
-
-
     private static Song getCurrentSong;
-    private Song songs[] = new Song[12];
+    public Song songs[] = new Song[16];
     private int currentIndex;
 
-    public SongCollection() {
+    public SongCollection(){
         Song Scargazer = new Song("S1001",
             "Scargazer",
             "Prompto",
@@ -81,6 +80,30 @@ public class SongCollection {
                 "https://p.scdn.co/mp3-preview/8084a68dfddbc0fa9fac02c88c822cf9f6768500?cid=2afe87a64b0042dabf51f37318616965",
                 3.89,
                 R.drawable.dreamy_night_cover);
+        Song StayNextToMe = new Song("S1013",
+                "Stay Next To Me",
+                "Quin XCII",
+                "https://p.scdn.co/mp3-preview/aa02bddcbc9614fe746b8de6ba685d1b0371018a?cid=2afe87a64b0042dabf51f37318616965",
+                3.43,
+                R.drawable.stay_next_to_me_cover);
+        Song yea = new Song("S1014",
+                "YEA",
+                "RITCHRD",
+                "https://p.scdn.co/mp3-preview/e6f4e9e762f4141b63c44eb7a11fed21878fe1bc?cid=2afe87a64b0042dabf51f37318616965)",
+                1.18,
+                R.drawable.yea_cover);
+        Song insecurity = new Song("S1015",
+                "my insecurities, not yours",
+                "slchld",
+                "https://p.scdn.co/mp3-preview/9543c449d92a8fd168586a036f29daf806180a52?cid=2afe87a64b0042dabf51f37318616965",
+                4.04,
+                R.drawable.my_insecurties_cover);
+        Song oneDay = new Song("S1016",
+                "One Day",
+                "Matisyahu",
+                "https://p.scdn.co/mp3-preview/7ef22a7d6a93d8a3aa54262f8fc3e32157e0eada?cid=2afe87a64b0042dabf51f37318616965",
+                3.46,
+                R.drawable.one_day_cover);
         songs[0]= Scargazer;
         songs[1]= 白日;
         songs[2]= Photograph;
@@ -93,6 +116,10 @@ public class SongCollection {
         songs[9]= Wicked;
         songs[10]=JustForYou;
         songs[11]=DreamyNight;
+        songs[12]=StayNextToMe;
+        songs[13]=yea;
+        songs[14]=insecurity;
+        songs[15]=oneDay;
     }
 
     public Song[] getSongs(){

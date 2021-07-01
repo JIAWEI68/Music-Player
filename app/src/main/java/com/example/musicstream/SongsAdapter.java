@@ -5,6 +5,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.icu.text.Transliterator;
+import android.util.ArraySet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -13,22 +15,25 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.collection.ArraySet;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Method;
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder>
 
-{public SongsAdapter(List<Song> song){
+{
+
+    public SongsAdapter(List<Song> song){
 
 
-    this.songs = FavList.toArray(new Song[0]);
+    this.songs = FavList.toArray(new Song[12]);
 
 }
     SharedPreferences sharedPreferences;
@@ -73,6 +78,7 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder>
             String album = sharedPreferences.getString("list", "");
             if (!album.equals("")) { TypeToken<ArrayList<Song>> token = new TypeToken<ArrayList<Song>>() {
             };Gson gson = new Gson();
+
             FavList = gson.fromJson(album, token.getType()); }
             FavList.add(song);
             for (Song song1 : FavList) { Log.d("temasek", "Song Name :" + song1.getTitle()); }
@@ -83,11 +89,6 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder>
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString("list",json);
             editor.apply();
-
-
-
-
-
         }
 
 
@@ -96,10 +97,12 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder>
             // 3) Use the feature shared preferences (WATCH THE VID) to transfer the JSON DATA OUT OF THIS PAGE
         );
 
+
         // GO WATCH THE VIDEO AND HE'LL EXPLAIN TO U HOW TO USE GSON TO TRANSFER THE ARRAY OF DATA ACROSS TO OTHER PAGES IN THE APP
     
 
     }
+
 
     @Override
     public int getItemCount() {

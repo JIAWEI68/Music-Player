@@ -77,9 +77,9 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder>
             sharedPreferences = activity.getSharedPreferences("Favourite", Context.MODE_PRIVATE);
             String album = sharedPreferences.getString("list", "");
             if (!album.equals("")) { TypeToken<ArrayList<Song>> token = new TypeToken<ArrayList<Song>>() {
-            };Gson gson = new Gson();
-
-            FavList = gson.fromJson(album, token.getType()); }
+            };
+            Gson gson = new Gson();
+            FavList = gson.fromJson(album, token.getType());}
             FavList.add(song);
             for (Song song1 : FavList) { Log.d("temasek", "Song Name :" + song1.getTitle()); }
             Gson gson = new Gson();

@@ -59,15 +59,7 @@ public class PlayingActivity extends AppCompatActivity {
         });
 
     }
-    Runnable bar = new Runnable() {
-        @Override
-        public void run() {
-            if (player != null&&player.isPlaying()){
-        seekBar.setProgress(player.getCurrentPosition());
 
-        }
-            handler.postDelayed(this,1000);}
-    };
 
     public void playPrevious(View view) {
         currentIndex = songCollection.getPrevSong(currentIndex);
@@ -87,9 +79,7 @@ public class PlayingActivity extends AppCompatActivity {
                 btnPlayPause.setText("PLAY");
             } else {
                 player.start();
-                handler.removeCallbacks(bar);
-                handler.postDelayed(bar,1000);
-                seekBar.setMax(player.getDuration());
+
                 btnPlayPause.setText("PAUSE");
             }
         }

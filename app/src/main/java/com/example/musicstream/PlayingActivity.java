@@ -59,12 +59,20 @@ public class PlayingActivity extends AppCompatActivity {
         });
 
     }
+    Runnable bar = new Runnable() {
+        @Override
+        public void run() {
+            if (player != null&&player.isPlaying()){
+        seekBar.setProgress(player.getCurrentPosition());
 
+        }
+            handler.postDelayed(this,1000);}
+    };
 
     public void playPrevious(View view) {
         currentIndex = songCollection.getPrevSong(currentIndex);
         Toast.makeText(this, "After clicking playPrevious,\nthe current index of this song\n" +
-                "in the SongCollection array is now : " + currentIndex, Toast.LENGTH_SHORT).show();
+                "in the SongCollection array is now:" + currentIndex, Toast.LENGTH_SHORT).show();
         Log.d("temasek","After playPrev, the index is now :" + currentIndex);
         displaySongBasedOnIndex(currentIndex);
         playSong(fileLink);
@@ -79,7 +87,9 @@ public class PlayingActivity extends AppCompatActivity {
                 btnPlayPause.setText("PLAY");
             } else {
                 player.start();
-
+                handler.removeCallbacks(bar);
+                handler.postDelayed(bar,1000);
+                seekBar.setMax(player.getDuration());
                 btnPlayPause.setText("PAUSE");
             }
         }
@@ -90,7 +100,7 @@ public class PlayingActivity extends AppCompatActivity {
     public void playNext(View view) {
         currentIndex = songCollection.getNextSong(currentIndex);
         Toast.makeText(this, "After clicking playNext,\nthe current index of this song\n" +
-                "in the SongCollection array is now:" + currentIndex, Toast.LENGTH_SHORT).show();
+                "in the SongCollection array is now : " + currentIndex, Toast.LENGTH_SHORT).show();
         Log.d("temasek","After playNext, the index is now :" + currentIndex);
         displaySongBasedOnIndex(currentIndex);
         playSong(fileLink);

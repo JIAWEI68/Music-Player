@@ -1,53 +1,49 @@
 package com.example.musicstream;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.arch.core.internal.SafeIterableMap;
-import androidx.collection.ArraySet;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Display;
 import android.view.View;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.net.ResponseCache;
 import java.util.ArrayList;
 
 public class FavouritesActivity extends AppCompatActivity {
 
     RecyclerView avList;
     SharedPreferences sharedPreferences;
-
+    ArrayList<Song> favList = new ArrayList<Song>();
+    SongCollection songCollection = new SongCollection();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("temasek", "IN HERE");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_songs);
         avList = findViewById(R.id.recycler_view);
-        FavouritesAdapter favouritesAdapter = new FavouritesAdapter(this);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        avList.setLayoutManager(linearLayoutManager);
-        avList.setAdapter(favouritesAdapter);
-        sharedPreferences = getSharedPreferences("Favourite", MODE_PRIVATE);
-        String album = sharedPreferences.getString("list", "");
-        if (!album.equals("")) {
+        sharedPreferences = getSharedPreferences("FavouriteSongs", MODE_PRIVATE);
+        String listOfFavouriteSongs = sharedPreferences.getString("list", "");
+        if (!listOfFavouriteSongs.equals("")) {
             TypeToken<ArrayList<Song>> token = new TypeToken<ArrayList<Song>>() {
             };
             Gson gson = new Gson();
-            favlist = gson.fromJson(album, token.getType());
+            favList = gson.fromJson(listOfFavouriteSongs, token.getType());
+            for (Song song1 : favList) {
+                Log.d("temasek", "Song Name :" + song1.getTitle());
+            }
         }
 
-
-
+        FavouritesAdapter favouritesAdapter = new FavouritesAdapter(this, favList);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        avList.setLayoutManager(linearLayoutManager);
+        avList.setAdapter(favouritesAdapter);
     }
-
-    SongCollection songCollection = new SongCollection();
-    ArrayList<Song> favlist = new ArrayList<Song>();
 
 
 
@@ -55,7 +51,7 @@ public class FavouritesActivity extends AppCompatActivity {
         String songId = view.getContentDescription().toString();
         Song song = songCollection.SearchSongById(songId);
         Gson gson = new Gson();
-        String json = gson.toJson(favlist);
+        String json = gson.toJson(favList);
         Log.d("gson",json);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("list",json);

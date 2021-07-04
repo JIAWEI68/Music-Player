@@ -16,11 +16,10 @@ import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-public class PlayingActivity extends AppCompatActivity {
+public class fav_playing extends AppCompatActivity {
     private String title = "";
     private String artiste = "";
     private String fileLink = "";
@@ -29,20 +28,18 @@ public class PlayingActivity extends AppCompatActivity {
 
     private MediaPlayer player = new MediaPlayer();
     private Button btnPlayPause = null;
-    public SongCollection songCollection = new SongCollection();
+    public FavouriteSongCollection songCollection = new FavouriteSongCollection();
     SeekBar seekBar;
     Handler handler = new Handler();
-    boolean repeatFlag = false;
     boolean shuffleFlag = false;
     Button shuffleBtn;
-    Button loopBtn;
-    SongCollection originalSongCollection = new SongCollection();
-    List<Song> shuffleList = Arrays.asList(songCollection.songs);
+    FavouriteSongCollection originalSongCollection = new FavouriteSongCollection();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_playing);
+        setContentView(R.layout.activity_fav_playing);
         btnPlayPause = findViewById(R.id.playButton);
         Bundle songData = this.getIntent().getExtras();
         currentIndex = songData.getInt("index");
@@ -63,59 +60,56 @@ public class PlayingActivity extends AppCompatActivity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                if (player != null && player.isPlaying()){
+                if (player != null && player.isPlaying()) {
                     player.seekTo(seekBar.getProgress());
                 }
             }
         });
         shuffleBtn = findViewById(R.id.shuffleBtn);
-        loopBtn = findViewById(R.id.loopBtn);
 
     }
+
     Runnable bar = new Runnable() {
         @Override
         public void run() {
-            if (player != null&&player.isPlaying()){
-        seekBar.setProgress(player.getCurrentPosition());
+            if (player != null && player.isPlaying()) {
+                seekBar.setProgress(player.getCurrentPosition());
 
+            }
+            handler.postDelayed(this, 1000);
         }
-            handler.postDelayed(this,1000);}
     };
 
     public void playPrevious(View view) {
-        currentIndex = songCollection.getPrevSong(currentIndex);
+        currentIndex = FavouriteSongCollection.getPrevSong(currentIndex);
         Toast.makeText(this, "After clicking playPrevious,\nthe current index of this song\n" +
                 "in the SongCollection array is now:" + currentIndex, Toast.LENGTH_SHORT).show();
-        Log.d("temasek","After playPrev, the index is now :" + currentIndex);
+        Log.d("temasek", "After playPrev, the index is now :" + currentIndex);
         displaySongBasedOnIndex(currentIndex);
         playSong(fileLink);
 
 
     }
 
-
-        @SuppressLint("ResourceType")
-        public void pauseOrPlay (View view){
-            if (player.isPlaying()) {
-                player.pause();
-                btnPlayPause.setBackgroundResource(R.drawable.ic_media_play_dark);
-            } else {
-                player.start();
-                handler.removeCallbacks(bar);
-                handler.postDelayed(bar,1000);
-                seekBar.setMax(player.getDuration());
-                btnPlayPause.setBackgroundResource(R.drawable.ic_media_pause_dark);
-            }
+    public void pauseOrPlay(View view) {
+        if (player.isPlaying()) {
+            player.pause();
+            btnPlayPause.setBackgroundResource(R.drawable.ic_media_play_dark);
+        } else {
+            player.start();
+            handler.removeCallbacks(bar);
+            handler.postDelayed(bar, 1000);
+            seekBar.setMax(player.getDuration());
+            btnPlayPause.setBackgroundResource(R.drawable.ic_media_pause_dark);
         }
-    
-
+    }
 
 
     public void playNext(View view) {
-        currentIndex = songCollection.getNextSong(currentIndex);
+        currentIndex = FavouriteSongCollection.getNextSong(currentIndex);
         Toast.makeText(this, "After clicking playNext,\nthe current index of this song\n" +
                 "in the SongCollection array is now : " + currentIndex, Toast.LENGTH_SHORT).show();
-        Log.d("temasek","After playNext, the index is now :" + currentIndex);
+        Log.d("temasek", "After playNext, the index is now :" + currentIndex);
         displaySongBasedOnIndex(currentIndex);
         playSong(fileLink);
     }
@@ -146,58 +140,29 @@ public class PlayingActivity extends AppCompatActivity {
             btnPlayPause.setBackgroundResource(R.drawable.ic_media_pause_dark);
             setTitle(title);
         } catch (IOException e) {
-            e.printStackTrace();}
+            e.printStackTrace();
         }
-        private void gracefullyStopsWhenMusicEnds(){
-            player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                @SuppressLint("ResourceType")
-                @Override
-                public void onCompletion(MediaPlayer mp) {
-                    Toast.makeText(getBaseContext(), "The song had ended and the onCompleteListener is activated\n" + "The button text is changed to 'PLAY'",
-                            Toast.LENGTH_SHORT).show();
-                    if(repeatFlag){
-                        pauseOrPlay(null);
-                    }else {
-                    playNext(null);}
-
-
-
-                }
-            });
-        }
-        @Override
-        public void onBackPressed(){
-        super.onBackPressed();
-            player.release();
-
-        }
-
-    public void shuffle(View view) {
-        if (shuffleFlag){
-            shuffleBtn.setBackgroundResource(R.drawable.shuffle_off);
-            songCollection = new SongCollection();
-        }
-        else{
-            shuffleBtn.setBackgroundResource(R.drawable.shuffle_on);
-            Collections.shuffle(shuffleList);
-            for (int i = 0; i < shuffleList.size(); i ++){
-                Log.d("shuffle", shuffleList.get(i).getTitle());
-                shuffleList.toArray(songCollection.songs);
-            }
-        }
-
-        shuffleFlag=!shuffleFlag;
     }
 
-    public void Loop(View view) {
-        if (repeatFlag){
-            loopBtn.setBackgroundResource(R.drawable.repeat_off);
-            songCollection = new SongCollection();
-        }
-        else{
-            loopBtn.setBackgroundResource(R.drawable.repeat_on);
-        }
-        repeatFlag = !repeatFlag;
+    private void gracefullyStopsWhenMusicEnds() {
+        player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @SuppressLint("ResourceType")
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                Toast.makeText(getBaseContext(), "The song had ended and the onCompleteListener is activated\n" + "The button text is changed to 'PLAY'",
+                        Toast.LENGTH_SHORT).show();
+                btnPlayPause.setBackgroundResource(R.drawable.ic_media_play_dark);
+
+
+            }
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        player.release();
+
     }
 }
 

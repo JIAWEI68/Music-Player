@@ -4,7 +4,7 @@ import java.util.Collection;
 
 public class SongCollection {
     private static Song getCurrentSong;
-    public Song songs[] = new Song[16];
+    public Song songs[] = new Song[17];
     private int currentIndex;
 
     public SongCollection(){
@@ -104,6 +104,12 @@ public class SongCollection {
                 "https://p.scdn.co/mp3-preview/7ef22a7d6a93d8a3aa54262f8fc3e32157e0eada?cid=2afe87a64b0042dabf51f37318616965",
                 3.46,
                 R.drawable.one_day_cover);
+        Song redBone = new Song("S1017",
+                "RedBone",
+                "Childish Gambino",
+                "https://p.scdn.co/mp3-preview/0167089f98ed9b52156232cc17294c7676a88dd4?cid=2afe87a64b0042dabf51f37318616965",
+                5.45,
+                R.drawable.redbone_cover);
         songs[0]= Scargazer;
         songs[1]= 白日;
         songs[2]= Photograph;
@@ -120,6 +126,7 @@ public class SongCollection {
         songs[13]=yea;
         songs[14]=insecurity;
         songs[15]=oneDay;
+        songs[16]=redBone;
     }
 
     public Song[] getSongs(){

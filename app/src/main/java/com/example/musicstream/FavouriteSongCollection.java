@@ -22,6 +22,7 @@ public class FavouriteSongCollection {
     }
 
 
+
     public ArrayList setFavouriteSongs(ArrayList<Song> FavouriteSongs){
             this.FavouriteSongs = FavouriteSongs;
             return this.getFavouriteSongs();
@@ -30,10 +31,11 @@ public class FavouriteSongCollection {
         return this.FavouriteSongs;
 
         }
+    public int getFavouriteSong(){
+        return FavouriteSongs.indexOf(FavouriteSongs);
 
-    public Song getCurrentSong(int selectedIndex) {
-        return FavouriteSongs.get(selectedIndex);
     }
+
 }
 
 

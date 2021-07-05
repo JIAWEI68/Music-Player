@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
@@ -52,6 +53,15 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.Vi
                 Intent intent = new Intent(activity, PlayingActivity.class);
                 intent.putExtra("index", position);
                 activity.startActivity(intent); });
+            holder.removeBtn.setOnClickListener(v -> {
+                favlist.remove(position);
+                sharedPreferences = activity.getSharedPreferences("FavouriteSongs", Context.MODE_PRIVATE);
+                String currentFavouriteSongs = sharedPreferences.getString("list", "");
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.remove("list");
+                editor.apply();
+                notifyDataSetChanged();
+            });
         }
     }
     @Override
@@ -60,6 +70,7 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.Vi
     }
     public class ViewHolder extends RecyclerView.ViewHolder {
         public View itemView;
+        public View removeBtn;
         public ImageView coverImage;
         public TextView titleText, artisteText;
 
@@ -70,6 +81,7 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.Vi
             coverImage = itemView.findViewById(R.id.song_cover);
             titleText = itemView.findViewById(R.id.song_title);
             artisteText = itemView.findViewById(R.id.song_artiste);
+            removeBtn = itemView.findViewById(R.id.removeBtn);
 
         }
 

@@ -21,8 +21,6 @@ public class FavouriteSongCollection {
         return 0;
     }
 
-
-
     public ArrayList setFavouriteSongs(ArrayList<Song> FavouriteSongs){
             this.FavouriteSongs = FavouriteSongs;
             return this.getFavouriteSongs();
@@ -35,7 +33,6 @@ public class FavouriteSongCollection {
         return FavouriteSongs.indexOf(FavouriteSongs);
 
     }
-
 }
 
 

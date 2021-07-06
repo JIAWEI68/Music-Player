@@ -19,7 +19,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class fav_playing extends AppCompatActivity {
+public class FavouritePlayingActivity extends AppCompatActivity {
     private String title = "";
     private String artiste = "";
     private String fileLink = "";
@@ -115,7 +115,7 @@ public class fav_playing extends AppCompatActivity {
     }
 
     public void displaySongBasedOnIndex(int selectedIndex) {
-        Song song = songCollection.getCurrentSong(selectedIndex);
+        Song song = songCollection.FavouriteSongs.get(selectedIndex);
         title = song.getTitle();
         artiste = song.getArtist();
         fileLink = song.getFileLink();

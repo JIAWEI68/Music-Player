@@ -13,23 +13,19 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.ViewHolder>
 
 {
     SharedPreferences sharedPreferences;
-    ArrayList<Song> favlist;
+    ArrayList<Song> favList;
     private Activity activity;
     //context of main activity
     //extended context
-    public FavouritesAdapter(Activity activity, ArrayList<Song> favlist){
+    public FavouritesAdapter(Activity activity, ArrayList<Song> favList){
         this.activity = activity;
-        this.favlist = favlist;
+        this.favList = favList;
     }
 
 
@@ -42,7 +38,7 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Song song = favlist.get(position);
+        Song song = favList.get(position);
         if(song!=null){
             holder.titleText.setText(song.getTitle());
             holder.artisteText.setText(song.getArtist());
@@ -54,7 +50,7 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.Vi
                 intent.putExtra("index", position);
                 activity.startActivity(intent); });
             holder.removeBtn.setOnClickListener(v -> {
-                favlist.remove(position);
+                favList.remove(position);
                 sharedPreferences = activity.getSharedPreferences("FavouriteSongs", Context.MODE_PRIVATE);
                 String currentFavouriteSongs = sharedPreferences.getString("list", "");
                 SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -66,7 +62,7 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.Vi
     }
     @Override
     public int getItemCount() {
-        return favlist.size();
+        return favList.size();
     }
     public class ViewHolder extends RecyclerView.ViewHolder {
         public View itemView;

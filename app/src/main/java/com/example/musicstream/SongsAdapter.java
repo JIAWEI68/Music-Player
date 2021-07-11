@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.view.View;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,7 +22,7 @@ import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder> {
+public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder> implements Filterable {
     SharedPreferences sharedPreferences;
 
 
@@ -29,13 +31,12 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder> 
    //context of main activity
    //extended context
    private Song[] songs;
+   private Song[] filteredSongs;
    public ArrayList<Song> currentFavList = new ArrayList<>();
    public SongsAdapter(Activity activity){
        this.activity = activity;
        SongCollection songCollection = new SongCollection();
-
        songs = songCollection.getSongs();
-
    }
     @NonNull
     @Override
@@ -58,9 +59,6 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder> 
             intent.putExtra("index", position);
             activity.startActivity(intent);
         });
-
-        // 1) Ensure duplicate songs dont get added into the array
-        // 2) Clear the json
         holder.AddButton.setOnClickListener(v -> {
             boolean hasMatch = false;
             Gson gson = new Gson();
@@ -78,7 +76,6 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder> 
                         currentFavList.add(song);
                     }
                     if(currentFavList.get(i).getTitle().equals(song.getTitle())) {
-                        // BREAK OUT OF FOR LOOP
                         break;
                     }
                 }
@@ -96,15 +93,9 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder> 
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString("list",json);
             editor.apply();
-        }
+        });
 
 
-                // 1) Here we have a arrayList of songs u stored in THIS PAGE.
-            // 2) Now convert this arrayList to JSON using GSON LIBRARY
-            // 3) Use the feature shared preferences (WATCH THE VID) to transfer the JSON DATA OUT OF THIS PAGE
-        );
-
-        // GO WATCH THE VIDEO AND HE'LL EXPLAIN TO U HOW TO USE GSON TO TRANSFER THE ARRAY OF DATA ACROSS TO OTHER PAGES IN THE APP
     
 
     }
@@ -113,6 +104,12 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder> 
     public int getItemCount() {
         return songs.length;
     }
+
+    @Override
+    public Filter getFilter() {
+        return null;
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         public View AddButton;
         public View itemView;

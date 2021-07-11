@@ -4,7 +4,7 @@ import java.util.Collection;
 
 public class SongCollection {
     private static Song getCurrentSong;
-    public Song songs[] = new Song[17];
+    public Song songs[] = new Song[20];
     private int currentIndex;
 
     public SongCollection(){
@@ -110,6 +110,24 @@ public class SongCollection {
                 "https://p.scdn.co/mp3-preview/0167089f98ed9b52156232cc17294c7676a88dd4?cid=2afe87a64b0042dabf51f37318616965",
                 5.45,
                 R.drawable.redbone_cover);
+        Song everlastingSummer = new Song("S1018",
+                "Everlasting Summer",
+                "Hikaru Station",
+                "https://p.scdn.co/mp3-preview/3473e43f252176228a75020d3c672fae3c195892?cid=2afe87a64b0042dabf51f37318616965",
+                4.37,
+                R.drawable.everlastin_summer);
+        Song drunkMe = new Song("S1019",
+                "Drunk Me",
+                "Davin Kingston",
+                "https://p.scdn.co/mp3-preview/dde251dddb5a373fa221d981715b1f06de1f0513?cid=2afe87a64b0042dabf51f37318616965",
+                3.15,
+                R.drawable.drunk_me);
+        Song parachute = new Song("S1020",
+                "parachute",
+                "John K",
+                "https://p.scdn.co/mp3-preview/8d68c12502ca5454361d93e8b9136d6564842cfb?cid=2afe87a64b0042dabf51f37318616965",
+                2.61,
+                R.drawable.parachute_cover);
         songs[0]= Scargazer;
         songs[1]= 白日;
         songs[2]= Photograph;
@@ -127,6 +145,9 @@ public class SongCollection {
         songs[14]=insecurity;
         songs[15]=oneDay;
         songs[16]=redBone;
+        songs[17]=everlastingSummer;
+        songs[18]=drunkMe;
+        songs[19]=parachute;
     }
 
     public Song[] getSongs(){

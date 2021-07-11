@@ -1,29 +1,32 @@
-
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context=".SongsActivity">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SongsActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="621dp"
+        android:layout_width="411dp"
+        android:layout_height="687dp"
+        android:layout_marginTop="96dp"
+        android:foregroundGravity="bottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/song_list_item" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_width="match_parent"
-        android:layout_height="57dp"
-        android:layout_below="@+id/recycler_view"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="58dp"
+    <SearchView
+        android:layout_width="411dp"
+        android:layout_height="96dp"
         android:layout_marginBottom="1dp"
-        android:foregroundGravity="bottom"
-        app:itemIconTint="@color/purple_200">
+        app:layout_constraintBottom_toTopOf="@+id/recycler_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    </com.google.android.material.bottomnavigation.BottomNavigationView>
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 
 

@@ -63,9 +63,7 @@ public class PlayingActivity extends AppCompatActivity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                if (player != null && player.isPlaying()){
                     player.seekTo(seekBar.getProgress());
-                }
             }
         });
         shuffleBtn = findViewById(R.id.shuffleBtn);
@@ -75,11 +73,8 @@ public class PlayingActivity extends AppCompatActivity {
     Runnable bar = new Runnable() {
         @Override
         public void run() {
-            if (player != null&&player.isPlaying()){
         seekBar.setProgress(player.getCurrentPosition());
-
-        }
-            handler.postDelayed(this,1000);}
+        handler.postDelayed(this,100);}
     };
 
     public void playPrevious(View view) {
@@ -102,7 +97,7 @@ public class PlayingActivity extends AppCompatActivity {
             } else {
                 player.start();
                 handler.removeCallbacks(bar);
-                handler.postDelayed(bar,1000);
+                handler.postDelayed(bar,100);
                 seekBar.setMax(player.getDuration());
                 btnPlayPause.setBackgroundResource(R.drawable.ic_media_pause_dark);
             }

@@ -51,7 +51,7 @@ public class PlayingActivity extends AppCompatActivity {
         playSong(fileLink);
         seekBar = findViewById(R.id.seekBar);
         handler.removeCallbacks(bar);
-        handler.postDelayed(bar,1000);
+        handler.postDelayed(bar,100);
         seekBar.setMax(player.getDuration());
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -95,9 +95,6 @@ public class PlayingActivity extends AppCompatActivity {
     }
     public void pauseOrPlay (View view){
             if (player.isPlaying()) {
-                handler.removeCallbacks(bar);
-                handler.postDelayed(bar,1000);
-                seekBar.setMax(player.getDuration());
                 player.pause();
                 btnPlayPause.setBackgroundResource(R.drawable.ic_media_play_dark);
             } else {

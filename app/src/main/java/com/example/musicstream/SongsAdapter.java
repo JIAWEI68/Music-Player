@@ -55,6 +55,12 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder> 
             activity.startActivity(intent);
         }
         );
+        holder.titleText.setOnClickListener(v -> {
+        Intent intent = new Intent(activity, PlayingActivity.class);
+        intent.putExtra("index", position);
+        activity.startActivity(intent);
+        }
+        );
         holder.AddButton.setOnClickListener(v -> {
             boolean hasMatch = false;
             Gson gson = new Gson();

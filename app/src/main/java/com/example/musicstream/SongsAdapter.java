@@ -25,11 +25,7 @@ import java.util.List;
 public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder> implements Filterable {
     SharedPreferences sharedPreferences;
 
-
-
    private Activity activity;
-   //context of main activity
-   //extended context
    private Song[] songs;
    private Song[] filteredSongs;
    public ArrayList<Song> currentFavList = new ArrayList<>();
@@ -51,14 +47,14 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder> 
 
         holder.titleText.setText(song.getTitle());
         holder.artisteText.setText(song.getArtist());
-        holder.coverImage.setImageDrawable(activity.getDrawable(song.getDrawable()));
-        //get id of drawable
-        //context.getDrawable file
+        holder.coverImage.setImageDrawable(activity.getDrawable(song.getDrawable())
+        );
         holder.coverImage.setOnClickListener(v -> {
             Intent intent = new Intent(activity, PlayingActivity.class);
             intent.putExtra("index", position);
             activity.startActivity(intent);
-        });
+        }
+        );
         holder.AddButton.setOnClickListener(v -> {
             boolean hasMatch = false;
             Gson gson = new Gson();
@@ -83,7 +79,6 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder> 
                 currentFavList.add(song);
             }
 
-
             for (Song song1 : currentFavList) {
                 Log.d("temasek", "Song Name :" + song1.getTitle());
             }
@@ -93,11 +88,8 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder> 
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString("list",json);
             editor.apply();
-        });
-
-
-    
-
+        }
+        );
     }
 
     @Override

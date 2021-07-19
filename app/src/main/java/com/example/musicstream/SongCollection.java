@@ -4,7 +4,7 @@ import java.util.Collection;
 
 public class SongCollection {
     private static Song getCurrentSong;
-    public Song songs[] = new Song[20];
+    public Song songs[] = new Song[23];
     private int currentIndex;
 
     public SongCollection(){
@@ -128,6 +128,24 @@ public class SongCollection {
                 "https://p.scdn.co/mp3-preview/8d68c12502ca5454361d93e8b9136d6564842cfb?cid=2afe87a64b0042dabf51f37318616965",
                 2.61,
                 R.drawable.parachute_cover);
+        Song queenBee = new Song("S1021",
+                "火炎",
+                "QUEEN BEE",
+                "https://p.scdn.co/mp3-preview/5de3de9cf71a2d6ecbe6a569e63be4399f82ba09?cid=2afe87a64b0042dabf51f37318616965",
+                3.6,
+                R.drawable.queen_bee);
+        Song summerTime = new Song("S1022",
+                "하계",
+                "Maggie",
+               "https://p.scdn.co/mp3-preview/8ddc6685b18c4728f3a6c4e461b9d5b9d751ce9f?cid=2afe87a64b0042dabf51f37318616965",
+                2.57,
+                R.drawable.summertime_cover);
+        Song suspect = new Song("S1023",
+                "Suspect",
+                "hololive IDOL PROJECT",
+                "https://p.scdn.co/mp3-preview/c0329d886247aea33a6d825de6a7fea6e60aa6af?cid=2afe87a64b0042dabf51f37318616965",
+                4.47,
+                R.drawable.suspect_cover);
         songs[0]= Scargazer;
         songs[1]= 白日;
         songs[2]= Photograph;
@@ -148,6 +166,9 @@ public class SongCollection {
         songs[17]=everlastingSummer;
         songs[18]=drunkMe;
         songs[19]=parachute;
+        songs[20]=queenBee;
+        songs[21]=summerTime;
+        songs[22]=suspect;
     }
 
     public Song[] getSongs(){

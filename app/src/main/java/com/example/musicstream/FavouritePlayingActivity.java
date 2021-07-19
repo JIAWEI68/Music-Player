@@ -64,7 +64,8 @@ public class FavouritePlayingActivity extends AppCompatActivity {
                     player.seekTo(seekBar.getProgress());
                 }
             }
-        });
+        }
+        );
         shuffleBtn = findViewById(R.id.shuffleBtn);
 
     }
@@ -95,7 +96,8 @@ public class FavouritePlayingActivity extends AppCompatActivity {
         if (player.isPlaying()) {
             player.pause();
             btnPlayPause.setBackgroundResource(R.drawable.ic_media_play_dark);
-        } else {
+        }
+        else {
             player.start();
             handler.removeCallbacks(bar);
             handler.postDelayed(bar, 1000);
@@ -115,6 +117,7 @@ public class FavouritePlayingActivity extends AppCompatActivity {
     }
 
     public void displaySongBasedOnIndex(int selectedIndex) {
+        songCollection.getFavouriteSongs();
         Song song = songCollection.FavouriteSongs.get(selectedIndex);
         title = song.getTitle();
         artiste = song.getArtist();
@@ -126,7 +129,6 @@ public class FavouritePlayingActivity extends AppCompatActivity {
         txtArtiste.setText(artiste);
         ImageView iCoverArt = findViewById(R.id.imgCoverArt);
         iCoverArt.setImageResource(drawable);
-
     }
 
     @SuppressLint("ResourceType")
@@ -139,7 +141,8 @@ public class FavouritePlayingActivity extends AppCompatActivity {
             gracefullyStopsWhenMusicEnds();
             btnPlayPause.setBackgroundResource(R.drawable.ic_media_pause_dark);
             setTitle(title);
-        } catch (IOException e) {
+        } catch (IOException e)
+        {
             e.printStackTrace();
         }
     }
@@ -149,20 +152,20 @@ public class FavouritePlayingActivity extends AppCompatActivity {
             @SuppressLint("ResourceType")
             @Override
             public void onCompletion(MediaPlayer mp) {
-                Toast.makeText(getBaseContext(), "The song had ended and the onCompleteListener is activated\n" + "The button text is changed to 'PLAY'",
+                Toast.makeText(getBaseContext(), "The song had ended and the onCompleteListener is activated\n",
                         Toast.LENGTH_SHORT).show();
                 btnPlayPause.setBackgroundResource(R.drawable.ic_media_play_dark);
 
 
             }
-        });
+        }
+        );
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         player.release();
-
     }
 }
 

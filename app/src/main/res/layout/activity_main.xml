@@ -9,21 +9,11 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/playlist_button"
-        android:layout_width="374dp"
-        android:layout_height="83dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
-        android:outlineSpotShadowColor="@color/grey"
-        android:text="PlayList Created"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
         android:id="@+id/Favourite_Song"
         android:layout_width="374dp"
         android:layout_height="83dp"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="68dp"
+        android:layout_marginBottom="35dp"
         android:onClick="FavouritePage"
         android:outlineSpotShadowColor="@color/grey"
         android:text="Favourite Songs"
@@ -32,7 +22,7 @@
         app:layout_constraintHorizontal_bias="0.432"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.096" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
@@ -74,12 +64,12 @@
         android:id="@+id/button"
         android:layout_width="374dp"
         android:layout_height="83dp"
-        android:layout_marginStart="16dp"
+        android:onClick="SongList"
         android:text="SongList"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.429"
-        android:onClick="SongList"/>
+        app:layout_constraintVertical_bias="0.314" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

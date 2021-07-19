@@ -38,7 +38,6 @@ public class FavouritesActivity extends AppCompatActivity {
                 Log.d("temasek", "Song Name :" + song1.getTitle());
             }
         }
-
         FavouritesAdapter favouritesAdapter = new FavouritesAdapter(this, favList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         avList.setLayoutManager(linearLayoutManager);

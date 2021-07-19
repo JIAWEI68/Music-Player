@@ -5,7 +5,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,8 +20,6 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.Vi
     SharedPreferences sharedPreferences;
     ArrayList<Song> favList;
     private Activity activity;
-    //context of main activity
-    //extended context
     public FavouritesAdapter(Activity activity, ArrayList<Song> favList){
         this.activity = activity;
         this.favList = favList;
@@ -32,7 +29,7 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.Vi
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.playlist_list_item, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.favourites_list_item, parent, false);
         return new ViewHolder(v);
     }
 
@@ -42,13 +39,8 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.Vi
         if(song!=null){
             holder.titleText.setText(song.getTitle());
             holder.artisteText.setText(song.getArtist());
-            holder.coverImage.setImageDrawable(activity.getDrawable(song.getDrawable()));
-            //get id of drawable
-            //context.getDrawable file
-            holder.coverImage.setOnClickListener(v -> {
-                Intent intent = new Intent(activity, PlayingActivity.class);
-                intent.putExtra("index", position);
-                activity.startActivity(intent); });
+            holder.coverImage.setImageDrawable(activity.getDrawable(song.getDrawable())
+            );
             holder.removeBtn.setOnClickListener(v -> {
                 favList.remove(position);
                 sharedPreferences = activity.getSharedPreferences("FavouriteSongs", Context.MODE_PRIVATE);
@@ -57,7 +49,8 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.Vi
                 editor.remove("list");
                 editor.apply();
                 notifyDataSetChanged();
-            });
+            }
+            );
         }
     }
     @Override

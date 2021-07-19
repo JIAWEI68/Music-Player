@@ -10,6 +10,10 @@
         android:id="@+id/favRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/playlist_list_item"
-        tools:ignore="InvalidId" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="InvalidId"
+        tools:listitem="@layout/favourites_list_item" />
 </androidx.constraintlayout.widget.ConstraintLayout>

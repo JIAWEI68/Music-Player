@@ -22,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="TextView"
+        android:textAlignment="center"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/song_cover"
         app:layout_constraintStart_toEndOf="@+id/song_cover"
@@ -42,16 +43,16 @@
 
     <ImageView
         android:id="@+id/AddButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="39dp"
+        android:layout_height="38dp"
         android:layout_marginStart="228dp"
-        android:layout_marginTop="32dp"
         android:contentDescription="@string/title_of_songs"
         android:onClick="Favourite"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.254"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/song_cover"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:srcCompat="@drawable/adding" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

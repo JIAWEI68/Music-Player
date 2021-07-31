@@ -5,71 +5,21 @@
     android:id="@+id/songList"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:onClick="SongList"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@drawable/splash_screen">
 
-    <Button
-        android:id="@+id/Favourite_Song"
-        android:layout_width="374dp"
-        android:layout_height="83dp"
-        android:layout_marginTop="68dp"
-        android:layout_marginBottom="35dp"
-        android:onClick="FavouritePage"
-        android:outlineSpotShadowColor="@color/grey"
-        android:text="Favourite Songs"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.432"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="409dp"
-        android:layout_height="57dp"
-        android:foregroundGravity="bottom"
-        android:outlineSpotShadowColor="@color/design_default_color_on_primary"
-        app:itemIconTint="@color/grey"
-        app:itemTextColor="#00BCD4"
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello!"
+        android:textAllCaps="true"
+        android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
-
-        <ImageButton
-            android:id="@+id/imageButton2"
-            android:layout_width="56dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layoutDirection="locale"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/musical_note" />
-
-        <ImageButton
-            android:id="@+id/imageButton3"
-            android:layout_width="56dp"
-            android:layout_height="match_parent"
-            app:srcCompat="@android:drawable/ic_menu_search" />
-
-        <ImageButton
-            android:id="@+id/imageButton4"
-            android:layout_width="56dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="right"
-            app:srcCompat="@drawable/settings" />
-    </com.google.android.material.bottomnavigation.BottomNavigationView>
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="374dp"
-        android:layout_height="83dp"
-        android:onClick="SongList"
-        android:text="SongList"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.314" />
-
+        app:layout_constraintVertical_bias="0.459" />
 </androidx.constraintlayout.widget.ConstraintLayout>

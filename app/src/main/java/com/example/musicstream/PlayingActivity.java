@@ -51,17 +51,15 @@ public class PlayingActivity extends AppCompatActivity {
         playSong(fileLink);
         seekBar = findViewById(R.id.seekBar);
         handler.removeCallbacks(bar);
-        handler.postDelayed(bar,100);
+        handler.postDelayed(bar,500);
         seekBar.setMax(player.getDuration());
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
             }
 
             @Override
@@ -81,7 +79,7 @@ public class PlayingActivity extends AppCompatActivity {
         if (player!= null && player.isPlaying()){
         seekBar.setProgress(player.getCurrentPosition());
         }
-            handler.postDelayed(this,1000);
+            handler.postDelayed(this,500);
         }
     };
 
@@ -104,8 +102,6 @@ public class PlayingActivity extends AppCompatActivity {
         }
     public void playNext(View view) {
         currentIndex = songCollection.getNextSong(currentIndex);
-        Toast.makeText(this, "After clicking playNext,\nthe current index of this song\n" +
-        "in the SongCollection array is now : " + currentIndex, Toast.LENGTH_SHORT).show();
         Log.d("temasek","After playNext, the index is now :" + currentIndex);
         displaySongBasedOnIndex(currentIndex);
         playSong(fileLink);
@@ -140,8 +136,6 @@ public class PlayingActivity extends AppCompatActivity {
             player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mp) {
-                    Toast.makeText(getBaseContext(), "The song had ended and the onCompleteListener is activated\n" + "The button text is changed to 'PLAY'",
-                            Toast.LENGTH_SHORT).show();
                     if(repeatFlag)
                     {
                         pauseOrPlay(null);
@@ -151,7 +145,8 @@ public class PlayingActivity extends AppCompatActivity {
                         playNext(null);
                     }
                 }
-            });
+            }
+            );
         }
         @Override
         public void onBackPressed()

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -12,27 +13,32 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder> implements Filterable {
-    SharedPreferences sharedPreferences;
+public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder> {
+   SharedPreferences sharedPreferences;
 
    private Activity activity;
    private Song[] songs;
    private Song[] filteredSongs;
    public ArrayList<Song> currentFavList = new ArrayList<>();
+   @RequiresApi(api = Build.VERSION_CODES.N)
    public SongsAdapter(Activity activity){
        this.activity = activity;
        SongCollection songCollection = new SongCollection();
        songs = songCollection.getSongs();
+       filteredSongs = songCollection.getSongs();
    }
     @NonNull
     @Override
@@ -63,6 +69,7 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder> 
         );
         holder.AddButton.setOnClickListener(v -> {
             boolean hasMatch = false;
+            Toast.makeText(activity.getBaseContext(),"Added To Favourites", Toast.LENGTH_SHORT).show();
             Gson gson = new Gson();
             sharedPreferences = activity.getSharedPreferences("FavouriteSongs", Context.MODE_PRIVATE);
             String currentFavouriteSongs = sharedPreferences.getString("list", "");
@@ -103,10 +110,7 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder> 
         return songs.length;
     }
 
-    @Override
-    public Filter getFilter() {
-        return null;
-    }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public View AddButton;

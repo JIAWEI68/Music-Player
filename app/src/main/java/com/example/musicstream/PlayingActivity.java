@@ -36,9 +36,9 @@ public class PlayingActivity extends AppCompatActivity {
     boolean shuffleFlag = false;
     Button shuffleBtn;
     Button loopBtn;
+    TextView barDuration;
     SongCollection originalSongCollection = new SongCollection();
     List<Song> shuffleList = Arrays.asList(songCollection.songs);
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +56,8 @@ public class PlayingActivity extends AppCompatActivity {
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                seekBar.setProgress(progress);
+                barDuration.setText("0:" + progress/1000);
             }
 
             @Override
@@ -71,6 +73,7 @@ public class PlayingActivity extends AppCompatActivity {
         });
         shuffleBtn = findViewById(R.id.shuffleBtn);
         loopBtn = findViewById(R.id.loopBtn);
+        barDuration = findViewById(R.id.barDuration);
 
     }
     Runnable bar = new Runnable() {

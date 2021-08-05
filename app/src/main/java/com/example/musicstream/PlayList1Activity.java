@@ -8,24 +8,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Build;
 import android.os.Bundle;
 
-import java.util.ArrayList;
+public class PlayList1Activity extends AppCompatActivity {
 
-public class SongsActivity extends AppCompatActivity {
-    ArrayList<Song> FavList = new ArrayList<Song>();
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_songs);
-        RecyclerView recyclerView = findViewById(R.id.Recycler_view);
-        SongsAdapter songsAdapter = new SongsAdapter(this);
+        setContentView(R.layout.activity_play_list1);
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        PlayList1Adapter playList1Adapter = new PlayList1Adapter(this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(songsAdapter);
-        setTitle("SongList");
+        recyclerView.setAdapter(playList1Adapter);
     }
-
-
-
 }
-

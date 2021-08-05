@@ -26,7 +26,7 @@ public class FavouritesActivity extends AppCompatActivity {
         Log.d("temasek", "IN HERE");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_songs);
-        avList = findViewById(R.id.recycler_view);
+        avList = findViewById(R.id.Recycler_view);
         sharedPreferences = getSharedPreferences("FavouriteSongs", MODE_PRIVATE);
         String listOfFavouriteSongs = sharedPreferences.getString("list", "");
         if (!listOfFavouriteSongs.equals("")) {

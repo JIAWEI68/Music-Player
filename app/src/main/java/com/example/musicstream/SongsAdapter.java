@@ -31,14 +31,12 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder> 
 
    private Activity activity;
    private Song[] songs;
-   private Song[] filteredSongs;
    public ArrayList<Song> currentFavList = new ArrayList<>();
    @RequiresApi(api = Build.VERSION_CODES.N)
    public SongsAdapter(Activity activity){
        this.activity = activity;
        SongCollection songCollection = new SongCollection();
        songs = songCollection.getSongs();
-       filteredSongs = songCollection.getSongs();
    }
     @NonNull
     @Override
@@ -110,8 +108,6 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder> 
         return songs.length;
     }
 
-
-
     public class ViewHolder extends RecyclerView.ViewHolder {
         public View AddButton;
         public View itemView;
@@ -127,7 +123,5 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder> 
             artisteText = itemView.findViewById(R.id.song_artiste);
             AddButton = itemView.findViewById(R.id.AddButton);
         }
-
-
     }
 }

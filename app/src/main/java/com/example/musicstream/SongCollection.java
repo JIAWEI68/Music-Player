@@ -4,7 +4,7 @@ import java.util.Collection;
 
 public class SongCollection {
     private static Song getCurrentSong;
-    public Song songs[] = new Song[27];
+    public Song[] songs = new Song[28];
     private int currentIndex;
 
     public SongCollection(){
@@ -170,6 +170,12 @@ public class SongCollection {
                 "https://p.scdn.co/mp3-preview/54865f9c0e1ede562c2a2166539c8217f5f01f01?cid=2afe87a64b0042dabf51f37318616965",
                 3.08,
                 R.drawable.t_pain);
+        Song leaveTheDoorOpen = new Song("S1028",
+                "Leave The Door Open",
+                "Bruno Mars Anderson .Paak Silk Sonic",
+                "https://p.scdn.co/mp3-preview/98f4a6a2e2c031e272ffc93c5fec5d7cb43de490?cid=2afe87a64b0042dabf51f37318616965",
+                4.03,
+                R.drawable.leave_the_door_open_cover);
         songs[0]= Scargazer;
         songs[1]= 白日;
         songs[2]= Photograph;
@@ -197,6 +203,7 @@ public class SongCollection {
         songs[24]=constant;
         songs[25]=storySeeker;
         songs[26]=tpain;
+        songs[27]=leaveTheDoorOpen;
     }
 
     public Song[] getSongs(){

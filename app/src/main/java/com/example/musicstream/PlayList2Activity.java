@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.view.View;
 
 public class PlayList2Activity extends AppCompatActivity {
 
@@ -17,5 +20,11 @@ public class PlayList2Activity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(playList2Adapter);
+        getSupportActionBar().hide();
+    }
+
+    public void goBack(View view) {
+        Intent intent = new Intent(PlayList2Activity.this, PlaylistsActivity.class);
+        startActivity(intent);
     }
 }

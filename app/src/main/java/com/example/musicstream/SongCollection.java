@@ -166,7 +166,7 @@ public class SongCollection {
                 R.drawable.story_seeker);
         Song tpain = new Song("S1027",
                 "T-Pain Mashup",
-                "T-Pain",
+                "T-Pain Kurt Hugo Schneider",
                 "https://p.scdn.co/mp3-preview/54865f9c0e1ede562c2a2166539c8217f5f01f01?cid=2afe87a64b0042dabf51f37318616965",
                 3.08,
                 R.drawable.t_pain);

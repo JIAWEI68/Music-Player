@@ -2,6 +2,7 @@ package com.example.musicstream;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -48,6 +49,7 @@ public class PlayList1PlayingActivity extends AppCompatActivity {
         Log.d("temasek", "Retrieved position is: " + currentIndex);
         displaySongBasedOnIndex(currentIndex);
         playSong(fileLink);
+        getSupportActionBar().hide();
         seekBar = findViewById(R.id.seekBar);
         handler.removeCallbacks(bar);
         handler.postDelayed(bar,500);
@@ -182,5 +184,12 @@ public class PlayList1PlayingActivity extends AppCompatActivity {
             loopBtn.setBackgroundResource(R.drawable.repeat_on);
         }
         repeatFlag = !repeatFlag;
+    }
+
+    public void goBack(View view) {
+        Intent intent = new Intent(PlayList1PlayingActivity.this, PlayList1Activity.class);
+        player.release();
+        handler.removeCallbacks(bar);
+        startActivity(intent);
     }
 }

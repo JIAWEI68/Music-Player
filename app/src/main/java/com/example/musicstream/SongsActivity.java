@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 
 import java.util.ArrayList;
 
@@ -23,9 +25,13 @@ public class SongsActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(songsAdapter);
         setTitle("SongList");
+        getSupportActionBar().hide();
     }
 
 
-
+    public void goBack(View view) {
+        Intent intent = new Intent(SongsActivity.this,HomeActivity.class);
+        startActivity(intent);
+    }
 }
 

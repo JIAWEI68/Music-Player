@@ -14,6 +14,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        getSupportActionBar().hide();
     }
     public void SongList(View view) {
         Intent intent = new Intent(HomeActivity.this, SongsActivity.class);

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,8 +26,8 @@ public class FavouritesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("temasek", "IN HERE");
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_songs);
-        avList = findViewById(R.id.Recycler_view);
+        setContentView(R.layout.activity_favourties);
+        avList = findViewById(R.id.favRecyclerView);
         sharedPreferences = getSharedPreferences("FavouriteSongs", MODE_PRIVATE);
         String listOfFavouriteSongs = sharedPreferences.getString("list", "");
         if (!listOfFavouriteSongs.equals("")) {
@@ -42,32 +43,12 @@ public class FavouritesActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         avList.setLayoutManager(linearLayoutManager);
         avList.setAdapter(favouritesAdapter);
+        getSupportActionBar().hide();
     }
-
-
-
-    public void Favourite(View view) {
-        String songId = view.getContentDescription().toString();
-        Song song = songCollection.SearchSongById(songId);
-        Gson gson = new Gson();
-        String json = gson.toJson(favList);
-        Log.d("gson",json);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("list",json);
-        editor.apply();
-
-
-
+    public void goBack(View view) {
+        Intent intent = new Intent(FavouritesActivity.this,HomeActivity.class);
+        startActivity(intent);
     }
-
-
-
-
-
-
-
-
-
     }
 
 

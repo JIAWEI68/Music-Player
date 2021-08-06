@@ -192,4 +192,10 @@ public class PlayList1PlayingActivity extends AppCompatActivity {
         handler.removeCallbacks(bar);
         startActivity(intent);
     }
+    public void goToHome(View view) {
+        Intent intent = new Intent(this, HomeActivity.class);
+        player.release();
+        handler.removeCallbacks(bar);
+        startActivity(intent);
+    }
 }

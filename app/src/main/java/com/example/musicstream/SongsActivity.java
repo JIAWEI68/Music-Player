@@ -33,5 +33,9 @@ public class SongsActivity extends AppCompatActivity {
         Intent intent = new Intent(SongsActivity.this,HomeActivity.class);
         startActivity(intent);
     }
+    public void goToHome(View view) {
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
+    }
 }
 

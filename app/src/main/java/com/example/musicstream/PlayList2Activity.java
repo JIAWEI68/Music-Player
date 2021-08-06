@@ -27,4 +27,8 @@ public class PlayList2Activity extends AppCompatActivity {
         Intent intent = new Intent(PlayList2Activity.this, PlaylistsActivity.class);
         startActivity(intent);
     }
+    public void goToHome(View view) {
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
+    }
 }

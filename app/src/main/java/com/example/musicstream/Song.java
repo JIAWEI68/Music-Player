@@ -30,11 +30,9 @@ public class Song {
     public void setDrawable(int drawable) {
         this.drawable = drawable;
     }
-
     public void setFileLink(String fileLink) {
         this.fileLink = fileLink;
     }
-
     public void setSongLength(double songLength) {
         this.songLength = songLength;
     }

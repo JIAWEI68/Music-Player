@@ -2,7 +2,6 @@ package com.example.musicstream;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -16,12 +15,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-public class PlayingActivity extends AppCompatActivity {
+public class FavPlayingActivity extends AppCompatActivity {
     private String title = "";
     private String artiste = "";
     private String fileLink = "";
@@ -30,7 +29,7 @@ public class PlayingActivity extends AppCompatActivity {
 
     private MediaPlayer player = new MediaPlayer();
     private Button btnPlayPause = null;
-    public SongCollection songCollection = new SongCollection();
+    ArrayList<Song> favList = FavouritesActivity.favList;
     SeekBar seekBar;
     Handler handler = new Handler();
     boolean repeatFlag = false;
@@ -38,12 +37,12 @@ public class PlayingActivity extends AppCompatActivity {
     Button shuffleBtn;
     Button loopBtn;
     TextView barDuration;
-    SongCollection originalSongCollection = new SongCollection();
-    List<Song> shuffleList = Arrays.asList(songCollection.songs);
+    SearchSongCollection originalSongCollection = new SearchSongCollection();
+    ArrayList<Song> constant;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_playing);
+        setContentView(R.layout.activity_fav_playing);
         btnPlayPause = findViewById(R.id.playButton);
         Bundle songData = this.getIntent().getExtras();
         currentIndex = songData.getInt("index");
@@ -76,44 +75,49 @@ public class PlayingActivity extends AppCompatActivity {
         shuffleBtn = findViewById(R.id.shuffleBtn);
         loopBtn = findViewById(R.id.loopBtn);
         barDuration = findViewById(R.id.barDuration);
-
     }
     Runnable bar = new Runnable() {
         @Override
         public void run() {
-        if (player!= null && player.isPlaying()){
-        seekBar.setProgress(player.getCurrentPosition());
-        }
+            if (player!= null && player.isPlaying()){
+                seekBar.setProgress(player.getCurrentPosition());
+            }
             handler.postDelayed(this,500);
         }
     };
 
     public void playPrevious(View view) {
-        currentIndex = songCollection.getPrevSong(currentIndex);
-        Toast.makeText(this, "After clicking playPrevious,\nthe current index of this song\n" +
-                "in the SongCollection array is now:" + currentIndex, Toast.LENGTH_SHORT).show();
+        if(currentIndex < favList.size() -1) {
+            currentIndex += 1;
+        } else {
+            currentIndex = 0;
+        }
         Log.d("temasek","After playPrev, the index is now :" + currentIndex);
         displaySongBasedOnIndex(currentIndex);
         playSong(fileLink);
     }
     public void pauseOrPlay (View view){
-            if (player.isPlaying()) {
-                player.pause();
-                btnPlayPause.setBackgroundResource(R.drawable.ic_media_play_dark);
-            } else {
-                player.start();
-                btnPlayPause.setBackgroundResource(R.drawable.ic_media_pause_dark);
-            }
+        if (player.isPlaying()) {
+            player.pause();
+            btnPlayPause.setBackgroundResource(R.drawable.ic_media_play_dark);
+        } else {
+            player.start();
+            btnPlayPause.setBackgroundResource(R.drawable.ic_media_pause_dark);
         }
+    }
     public void playNext(View view) {
-        currentIndex = songCollection.getNextSong(currentIndex);
+        if(currentIndex < favList.size() -1) {
+            currentIndex += 1;
+        } else {
+            currentIndex = 0;
+        }
         Log.d("temasek","After playNext, the index is now :" + currentIndex);
         displaySongBasedOnIndex(currentIndex);
         playSong(fileLink);
     }
 
     public void displaySongBasedOnIndex(int selectedIndex) {
-        Song song = songCollection.getCurrentSong(selectedIndex);
+        Song song = favList.get(currentIndex);
         title = song.getTitle();
         artiste = song.getArtist();
         fileLink = song.getFileLink();
@@ -136,60 +140,32 @@ public class PlayingActivity extends AppCompatActivity {
             setTitle(title);
         } catch (IOException e) {
             e.printStackTrace();}
-        }
-        private void gracefullyStopsWhenMusicEnds(){
-            player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                @Override
-                public void onCompletion(MediaPlayer mp) {
-                    if(repeatFlag)
-                    {
-                        pauseOrPlay(null);
-                    }
-                    else
-                    {
-                        playNext(null);
-                    }
-                }
+    }
+    private void gracefullyStopsWhenMusicEnds(){
+    player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+    @Override
+    public void onCompletion(MediaPlayer mp) {
+    if(repeatFlag)
+    {
+     pauseOrPlay(null);
+    }
+     else
+    {
+    playNext(null);
+    }
             }
-            );
-        }
-        @Override
-        public void onBackPressed()
-        {
+            }
+        );
+    }
+    @Override
+    public void onBackPressed()
+    {
         super.onBackPressed();
-            player.release();
-            handler.removeCallbacks(bar);
-        }
-
-    public void shuffle(View view) {
-        if (shuffleFlag){
-            shuffleBtn.setBackgroundResource(R.drawable.shuffle_off);
-            songCollection = new SongCollection();
-        }
-        else{
-            shuffleBtn.setBackgroundResource(R.drawable.shuffle_on);
-            Collections.shuffle(shuffleList);
-            for (int i = 0; i < shuffleList.size(); i ++){
-                Log.d("shuffle", shuffleList.get(i).getTitle());
-                shuffleList.toArray(songCollection.songs);
-            }
-        }
-        shuffleFlag=!shuffleFlag;
+        player.release();
+        handler.removeCallbacks(bar);
     }
-
-    public void Loop(View view) {
-        if (repeatFlag){
-            loopBtn.setBackgroundResource(R.drawable.repeat_off);
-            songCollection = new SongCollection();
-        }
-        else{
-            loopBtn.setBackgroundResource(R.drawable.repeat_on);
-        }
-        repeatFlag = !repeatFlag;
-    }
-
     public void goBack(View view) {
-        Intent intent = new Intent(PlayingActivity.this, SongsActivity.class);
+        Intent intent = new Intent(FavPlayingActivity.this, FavouritesActivity.class);
         player.release();
         handler.removeCallbacks(bar);
         startActivity(intent);
@@ -206,6 +182,5 @@ public class PlayingActivity extends AppCompatActivity {
         handler.removeCallbacks(bar);
         startActivity(intent);
     }
+
 }
-
-

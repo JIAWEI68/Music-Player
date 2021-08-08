@@ -11,6 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MusicStream">
+        <activity android:name=".FavPlayingActivity"></activity>
+        <activity android:name=".SearchAdapter" />
+        <activity android:name=".SearchActivity"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
         <activity android:name=".PlayList3PlayingActivity" />
         <activity android:name=".PlayList3Adapter" />
         <activity android:name=".PlayList3Activity" />

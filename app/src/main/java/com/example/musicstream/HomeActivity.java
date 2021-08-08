@@ -30,4 +30,9 @@ public class HomeActivity extends AppCompatActivity {
         Intent intent = new Intent(HomeActivity.this,PlaylistsActivity.class);
         startActivity(intent);
     }
+
+    public void goToSearch(View view) {
+        Intent intent = new Intent(this, SearchActivity.class);
+        startActivity(intent);
+    }
 }

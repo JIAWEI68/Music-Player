@@ -196,4 +196,11 @@ public class PlayList2PlayingActivity extends AppCompatActivity {
         handler.removeCallbacks(bar);
         startActivity(intent);
     }
+    public void goToSearch(View view) {
+        Intent intent = new Intent(this, SearchActivity.class);
+        player.release();
+        handler.removeCallbacks(bar);
+        startActivity(intent);
+    }
+
 }

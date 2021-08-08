@@ -1,21 +1,17 @@
 package com.example.musicstream;
 
-import android.view.GestureDetector;
-
-import java.util.Collection;
-
-public class SongCollection {
+public class SearchSongCollection {
     private static Song getCurrentSong;
     public Song[] songs = new Song[30];
     private int currentIndex;
 
-    public SongCollection(){
+    public SearchSongCollection(){
         Song Scargazer = new Song("S1001",
-            "Scargazer",
-            "Prompto",
-            "https://p.scdn.co/mp3-preview/4d368f85ea9df59a9aa321241b1b3986017af8b3?cid=2afe87a64b0042dabf51f37318616965",
-            2.4,
-            R.drawable.scargazer_cover);
+                "Scargazer",
+                "Prompto",
+                "https://p.scdn.co/mp3-preview/4d368f85ea9df59a9aa321241b1b3986017af8b3?cid=2afe87a64b0042dabf51f37318616965",
+                2.4,
+                R.drawable.scargazer_cover);
         Song 白日 = new Song("S1002",
                 "白日",
                 "King Gnu",
@@ -139,7 +135,7 @@ public class SongCollection {
         Song summerTime = new Song("S1022",
                 "하계",
                 "Maggie",
-               "https://p.scdn.co/mp3-preview/8ddc6685b18c4728f3a6c4e461b9d5b9d751ce9f?cid=2afe87a64b0042dabf51f37318616965",
+                "https://p.scdn.co/mp3-preview/8ddc6685b18c4728f3a6c4e461b9d5b9d751ce9f?cid=2afe87a64b0042dabf51f37318616965",
                 2.57,
                 R.drawable.summertime_cover);
         Song suspect = new Song("S1023",
@@ -265,6 +261,3 @@ public class SongCollection {
         return null;
     }
 }
-
-
-

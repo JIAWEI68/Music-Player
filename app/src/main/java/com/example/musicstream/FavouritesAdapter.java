@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,10 +18,12 @@ import java.util.ArrayList;
 public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.ViewHolder>
 
 {
+
     SharedPreferences sharedPreferences;
     ArrayList<Song> favList;
     private Activity activity;
-    public FavouritesAdapter(Activity activity, ArrayList<Song> favList){
+
+    public FavouritesAdapter( @NonNull Activity activity, ArrayList<Song> favList){
         this.activity = activity;
         this.favList = favList;
     }
@@ -41,6 +44,12 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.Vi
             holder.artisteText.setText(song.getArtist());
             holder.coverImage.setImageDrawable(activity.getDrawable(song.getDrawable())
             );
+            holder.coverImage.setOnClickListener(v -> {
+            Intent intent = new Intent(activity, FavPlayingActivity.class);
+            intent.putExtra("index", position);
+            activity.startActivity(intent);
+            }
+            );
             holder.removeBtn.setOnClickListener(v -> {
                 favList.remove(position);
                 sharedPreferences = activity.getSharedPreferences("FavouriteSongs", Context.MODE_PRIVATE);
@@ -55,7 +64,8 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.Vi
     }
     @Override
     public int getItemCount() {
-        return favList.size();
+        if (favList == null){return 0;}
+       else { return favList.size(); }
     }
     public class ViewHolder extends RecyclerView.ViewHolder {
         public View itemView;

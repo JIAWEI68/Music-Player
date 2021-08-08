@@ -16,10 +16,9 @@ import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 
 public class FavouritesActivity extends AppCompatActivity {
-
+    public static ArrayList<Song> favList;
     RecyclerView avList;
     SharedPreferences sharedPreferences;
-    ArrayList<Song> favList = new ArrayList<Song>();
     SongCollection songCollection = new SongCollection();
 
     @Override
@@ -54,6 +53,11 @@ public class FavouritesActivity extends AppCompatActivity {
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
     }
+    public void goToSearch(View view) {
+        Intent intent = new Intent(this, SearchActivity.class);
+        startActivity(intent);
+    }
+
 
 
 }

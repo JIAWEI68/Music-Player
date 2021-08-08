@@ -67,8 +67,8 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder> 
         );
         holder.AddButton.setOnClickListener(v -> {
             boolean hasMatch = false;
-            Toast.makeText(activity.getBaseContext(),"Added To Favourites", Toast.LENGTH_SHORT).show();
             Gson gson = new Gson();
+            Toast.makeText(activity.getBaseContext(),"Added To Favourites", Toast.LENGTH_SHORT).show();
             sharedPreferences = activity.getSharedPreferences("FavouriteSongs", Context.MODE_PRIVATE);
             String currentFavouriteSongs = sharedPreferences.getString("list", "");
             if (!currentFavouriteSongs.equals("")) {
